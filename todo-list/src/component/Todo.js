@@ -1,11 +1,18 @@
 import React from 'react';
 
-const Todo = (props) => {
-	return (
-		<li>{props.task}
+import './Todo.css';
 
+const Todo = (props) => {
+	const completeClass = props.complete ? 'complete' : '';
+	return (
+		<li className={completeClass} onClick={handleClick}>
+			{props.task}
 		</li>
-	)
+	);
+
+	function handleClick(e) {
+		props.toggleTodo(props.index);
+	}
 }
 
 export default Todo;

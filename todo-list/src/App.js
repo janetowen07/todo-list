@@ -9,6 +9,7 @@ constructor(props) {
   this.state = {
     todos: this.props.todos
   };
+  this.toggleTodo = this.toggleTodo.bind(this);
 }
 
   render() {
@@ -21,12 +22,28 @@ constructor(props) {
               <Todo key={i}
                 task={todo.task}
                 complete={todo.complete}
+                toggleTodo={this.toggleTodo}
+                index={i}
                 />
             );
           })}
         </ul>
       </div>
     );
+  }
+
+  toggleTodo(index) {
+    const newTodos = this.state.todos.map((todo, i) => {
+      if (i === index) {
+        return Object.assign({}, todo, {
+          complete: !todo.complete
+        });
+      }
+      return todo;
+    });
+    this.setState({
+      todos: newTodos
+    });
   }
 }
 
